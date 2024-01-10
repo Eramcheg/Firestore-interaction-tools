@@ -2,6 +2,7 @@ import datetime
 
 import openpyxl
 
+# Effective dictionary that help replace all repetitive names with italian analogs
 italian_names = {
     "Anhänger":"Pendente",
     "Armband":"Braccialetto",
@@ -15,6 +16,7 @@ italian_names = {
 
 }
 
+# Function searches for number in articles.xlsx and put information from there to the new file
 def search_and_create_new_excel(input_strings, source_excel_file, output_excel_file, group_num):
     # Load the source Excel file
     wb = openpyxl.load_workbook(source_excel_file)
@@ -26,12 +28,14 @@ def search_and_create_new_excel(input_strings, source_excel_file, output_excel_f
     new_sheet.title = group_num
     print('here')
     header =["FA_SORTNR","Artnr.","best. Menge","Artikelbezeichnung","VK4"]
+
     # Iterate over input strings and find matching rows
     new_sheet.append(header)
     for index, input_string in enumerate(input_strings, start=1):
         for row in sheet.iter_rows(min_row=2):  # Assuming the first row is a header
             if row[4].value == input_string:
 
+                # Replacing product type name with italian name
                 description = row[6].value
                 for german_name, italian_name in italian_names.items():
                     if german_name in description:
@@ -40,11 +44,11 @@ def search_and_create_new_excel(input_strings, source_excel_file, output_excel_f
 
 
                 new_sheet.append([
-                    index,                    # Ordinal number
-                    input_string,             # Input string
-                    row[2].value,                       # Empty column //38
+                    index,                   # Ordinal number
+                    input_string,            # Input string
+                    row[2].value,            # Empty column //38
                     description,             # 5th column from original file
-                    row[15].value # 47th column from original file  //46
+                    row[15].value            # 47th column from original file  //46
                 ])
                 break
             else:
@@ -53,9 +57,10 @@ def search_and_create_new_excel(input_strings, source_excel_file, output_excel_f
 
     # Save the new Excel file
     new_wb.save(f"new_vitrines/{output_excel_file}")
+
+
 print("Type name of your file. Press enter if you'd like to use default name")
 file_name = input()
-
 
 print("Provide group number first, then provide product's numbers")
 group_num = input()
@@ -69,7 +74,7 @@ if file_name == "":
 
 print(f"You entered {group_num}. \nNow provide numbers, each from new line, or type -1 to finish")
 
-# Example usage
+# Product numbers input until user write -1
 input_strings = []
 inp = ""
 while inp!="-1":
@@ -78,6 +83,7 @@ while inp!="-1":
     if(inp != "-1"):
         print(f"inside {inp}")
         input_strings.append(inp)
-
 print(input_strings)
+
+# Call of main function that will create xlsx file with all product numbers inside
 search_and_create_new_excel(input_strings, 'articles.xlsx', file_name, f"v{group_num}")
