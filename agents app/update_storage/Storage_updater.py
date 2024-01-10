@@ -1,50 +1,3 @@
-# import csv
-# import firebase_admin
-# from firebase_admin import credentials, firestore
-#
-# # Initialize Firebase Admin with your service account credentials
-# cred = credentials.Certificate("G:\\FIles\\firebase\\key2.json")
-# firebase_admin.initialize_app(cred)
-#
-# # Reference the collection where you want to update the document
-# collection_ref = firestore.client().collection("item")
-#
-# # Specify the field and its value for the query
-# path = "storage.csv"
-#
-# # Prepare a batch for updates
-# batch = firestore.client().batch()
-#
-# with open(path, 'r') as file:
-#     csv_reader = csv.reader(file, delimiter=';')
-#     for row in csv_reader:
-#         if row[1] != 'quantity':
-#             query_value = row[0]
-#             try:
-#                 new_value = int(row[1])
-#             except:
-#
-#                 value = round(float(row[1]) + ((-0.5) if float(row[1])>0 else 0.5), 0 )
-#                 # quantity.append(int(value))
-#                 new_value = value
-#             #new_value = row[1]
-#
-#             # Query for documents where the specified field matches the specified value
-#             query = collection_ref.where("name", "==", query_value)
-#             query_results = query.get()
-#
-#             for doc_snapshot in query_results:
-#                 # Update the document in the batch
-#
-#                 field1_value = doc_snapshot.get("quantity")
-#                 print("Olda value:", field1_value, "New value:", new_value)
-#                 if field1_value != new_value:
-#                     doc_ref = doc_snapshot.reference
-#                     batch.update(doc_ref, {"quantity": new_value})
-#
-#
-# # Commit the batch updates
-# batch.commit()
 import openpyxl
 import csv
 import io
@@ -67,6 +20,7 @@ xlsx_file_path = "../storages/04.01.2023.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 
+# Searching for needed quantity and numbers columns
 col = 0
 for i in sheet.iter_cols():
     if(i[0].value == 'Lagerstand Gesamt'):
@@ -96,7 +50,7 @@ output.seek(0)
 
 # Prepare a batch for updates
 batch = firestore.client().batch()
-# print(output)
+
 # Process the in-memory CSV data
 csv_reader = csv.reader(output, delimiter=';')
 next(csv_reader)  # Skip the header row

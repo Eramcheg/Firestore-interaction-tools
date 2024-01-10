@@ -15,5 +15,3 @@ for filename in files:
 
         # Rename the file
         os.rename(old_path, new_path)
-# for filename in os.listdir(directory_path):
-#     os.na
