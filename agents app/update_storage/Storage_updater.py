@@ -16,7 +16,7 @@ firebase_admin.initialize_app(cred)
 collection_ref = firestore.client().collection("item")
 
 # Load Excel workbook
-xlsx_file_path = "../storages/04.01.2023.xlsx"
+xlsx_file_path = "../storages/11.01.2024.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 
