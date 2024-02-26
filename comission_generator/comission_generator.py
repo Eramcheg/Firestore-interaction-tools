@@ -20,9 +20,9 @@ headers = [
     "Payments Dates"
 ]
 
-CURRENT_DATE = "11.2023"
+CURRENT_DATE = "01.2024"
 italy_agents = ["V000161","V000158","V000155",'V000147','V000142','V000122','V000157','V000030',"V000096",'V000136','V000184', 'V000186']
-quartals = {"First":["01.2023","02.2023","03.2023"],"Second":["04.2023","05.2023","06.2023"],"Third":["07.2023","08.2023","09.2023"],"Fourth":["10.2023","11.2023","12.2023"]}
+quartals = {"First":["01.2024","02.2024","03.2024"],"Second":["04.2023","05.2023","06.2023"],"Third":["07.2023","08.2023","09.2023"],"Fourth":["10.2023","11.2023","12.2023"]}
 dict = {}
 
 import openpyxl
@@ -107,9 +107,9 @@ def color_cells(filename):
         target_cell2 = sheet.cell(row=sheet.max_row, column=14)
         source_cell3 = sheet.cell(row=sheet.max_row - 2, column=16)
         target_cell3 = sheet.cell(row=sheet.max_row, column=16)
-        source_cell2.value = "November paid amount"
+        source_cell2.value = "September paid amount"
         target_cell2.value = "All paid amount"
-        source_cell3.value = "November comissions"
+        source_cell3.value = "September comissions"
         target_cell3.value = "All comissions"
         #target_cell.value = source_cell.value
 
@@ -144,7 +144,7 @@ def make_agents_tables(filename):
     # Create sheets for each Vertreter
     for vertreter, vertreter_data in vertreter_dict.items():
         # Create a new sheet with the name as Vertreter value
-        new_sheet = wb.create_sheet(title=str(vertreter) + " Total 23")
+        new_sheet = wb.create_sheet(title=str(vertreter) + " Total 24")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -165,51 +165,75 @@ def make_agents_tables(filename):
                 for col_num in range(1,17):
                     new_sheet.cell(row=new_sheet.max_row, column=col_num).fill = fill3
 
-    for i in range(2, len(wb.worksheets)):
-        sheet = wb.worksheets[i]
-        total_sum = 0
-        comission_sum = 0
-        for col in range(19, 27):  # Columns O to Z have indexes 15 to 27
-            for row in range(1, sheet.max_row + 1):  # Iterate over all rows
-                cell = sheet.cell(row=row, column=col)
-                cell_pecrent = sheet.cell(row=row, column=5)
-                if cell.value and (",  " in str(cell.value) or ", " in str(cell.value)):
-                    try:
-                        float_val = float(str(cell.value).split(",  ")[1])
-                        total_sum += float_val
-                        percent = float(str(cell_pecrent.value))
-                        comission_sum += float_val * percent / 100
-                    except:
-                        pass
-        # for row in range(1, sheet.max_row + 1):  # Iterate over all rows
-        #     cell = sheet.cell(row=row, column=18)
-        #     cell_pecrent = sheet.cell(row=row, column=5)
-        #     if cell.value and (",  " in str(cell.value) or ", " in str(cell.value)):
-        #         try:
-        #             float_val = float(str(cell.value).split(",  ")[1])
-        #             total_sum -= float_val
-        #             percent = float(str(cell_pecrent.value))
-        #             comission_sum -= float_val * percent / 100
-        #         except:
-        #             pass
-        source_cell2 = sheet.cell(row=sheet.max_row + 1, column=15)
-        source_cell3 = sheet.cell(row=sheet.max_row, column=14)
-        total_sum = round(total_sum, 2)
-        source_cell2.value = total_sum
-        source_cell3.value = "All paid amount"
 
-        source_cell4 = sheet.cell(row=sheet.max_row, column=17)
-        source_cell5 = sheet.cell(row=sheet.max_row, column=16)
-        comission_sum = round(comission_sum, 2)
-        source_cell4.value = comission_sum
-        source_cell5.value = "All comissions"
-        light_green_fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
+#ПОДСЧЕТ ТУТ
+    try:
+        for i in range(2, len(wb.worksheets)):
+            sheet = wb.worksheets[i]
+            total_sum = 0
+            comission_sum = 0
+            for row in range(2, sheet.max_row + 1):  # Iterate over all rows
+                row_sum = 0
+                percent_sum = 0
 
-        source_cell2.fill = light_green_fill
-        source_cell4.fill = light_green_fill
+                cell = sheet.cell(row=row, column=7)
+                print(cell.value)
+                all_value = float(str(cell.value))
+                all_percent_value = 0
 
+                for col in range(19, 27):  # Columns O to Z have indexes 15 to 27
+
+                    cell = sheet.cell(row=row, column=col)
+                    cell_pecrent = sheet.cell(row=row, column=5)
+                    if cell.value and (",  " in str(cell.value) or ", " in str(cell.value)):
+                        try:
+                            float_val = float(str(cell.value).split(",  ")[1])
+                            row_sum += float_val
+                            percent = float(str(cell_pecrent.value))
+                            percent_sum += float_val * percent / 100
+                        except:
+                            pass
+
+                    if col == 26:
+                        if all_value > 0:
+                            if all_value>row_sum:
+                                total_sum += row_sum
+                                comission_sum += percent_sum
+                            else:
+                                try:
+                                    total_sum+=all_value
+                                    comission_sum += all_value * float(str(cell_pecrent.value)) / 100
+                                except:pass
+            # for row in range(1, sheet.max_row + 1):  # Iterate over all rows
+            #     cell = sheet.cell(row=row, column=18)
+            #     cell_pecrent = sheet.cell(row=row, column=5)
+            #     if cell.value and (",  " in str(cell.value) or ", " in str(cell.value)):
+            #         try:
+            #             float_val = float(str(cell.value).split(",  ")[1])
+            #             total_sum -= float_val
+            #             percent = float(str(cell_pecrent.value))
+            #             comission_sum -= float_val * percent / 100
+            #         except:
+            #             pass
+            source_cell2 = sheet.cell(row=sheet.max_row + 1, column=15)
+            source_cell3 = sheet.cell(row=sheet.max_row, column=14)
+            total_sum = round(total_sum, 2)
+            source_cell2.value = total_sum
+            source_cell3.value = "All paid amount"
+
+            source_cell4 = sheet.cell(row=sheet.max_row, column=17)
+            source_cell5 = sheet.cell(row=sheet.max_row, column=16)
+            comission_sum = round(comission_sum, 2)
+            source_cell4.value = comission_sum
+            source_cell5.value = "All comissions"
+            light_green_fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
+
+            source_cell2.fill = light_green_fill
+            source_cell4.fill = light_green_fill
+    except:
+        pass
     # Save the workbook with the new sheets
-    wb.save('updated_filename.xlsx')
+    wb.save('updated_filename_fix.xlsx')
     # Print the result
     print(vertreter_dict)
     pass
@@ -235,7 +259,7 @@ def make_month_tables(filename):
 
         for x in range(18, len(row)):
             if vertreter_value in italy_agents:
-                for date in quartals['Fourth']:
+                for date in quartals['First']:
                     if date in str(row[x]):
                         if row[x] and (",  " in str(row[x]) or ", " in str(row[x])):
                             try:
@@ -271,6 +295,8 @@ def make_month_tables(filename):
             row1[2] = str(row1[2]).replace(" 00:00:00","")
             row1[14] = paid
             print(float(row1[6]))
+            print(paid)
+            # print()
             if paid == 0:
                 row1[15] = "UNPAID"
             elif paid / float(row1[6]) >= 1:
@@ -279,7 +305,7 @@ def make_month_tables(filename):
                 row1[15] = "PARTIALLY PAID"
             row1[16] = round(comission,1)
             if vertreter_value in italy_agents:
-                for date in quartals['Fourth']:
+                for date in quartals['First']:
                     if date in str(row1[17]):
                         break
                     else:
@@ -314,9 +340,9 @@ def make_month_tables(filename):
         # Create a new sheet with the name as Vertreter value
         new_sheet = ""
         if vertreter in italy_agents:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Fourth 23")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " First 24")
         else:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Nov 23")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Jan 24")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -387,8 +413,8 @@ def make_month_tables(filename):
 
 
 if __name__ == "__main__":
-    filename = "november/OutputResult0.xlsx"
+    filename = "january_2024/OutputResult0.xlsx"
     # color_cells(filename)
-    make_agents_tables(filename)
+    # make_agents_tables(filename)
     make_month_tables(filename)
     # color_cells('october/updated_filename2_old.xlsx')
