@@ -3,7 +3,28 @@ import csv
 import io
 import firebase_admin
 from firebase_admin import credentials, firestore
+import ftplib
+import datetime
 
+# FTP_HOST = "server1.agentsoliverweber.com"
+# FTP_USER = "oliverweber@agentsoliverweber.com"
+# FTP_PASS = "Zh5]MVF(GhZ{"
+# today_date = datetime.datetime.now().strftime("%d.%m.%Y")
+# filename = f"{today_date}.xlsx"
+#
+# full_path = '../storages/' + filename
+#
+# ftp = ftplib.FTP(FTP_HOST)
+# ftp.login(FTP_USER, FTP_PASS)
+# ftp.cwd('ftp/storages')
+#
+# with open(full_path, 'wb') as local_file:
+#     ftp.retrbinary('RETR ' + filename, local_file.write)
+# local_file.close()
+# ftp.quit()
+#
+# print(f"Downloaded '{filename}' from the FTP server.")
+#
 columnQuantity = 2  # Starts with 0
 columnNumber = 4 # Starts with 0
 
@@ -16,7 +37,7 @@ firebase_admin.initialize_app(cred)
 collection_ref = firestore.client().collection("item")
 
 # Load Excel workbook
-xlsx_file_path = "../storages/11.01.2024.xlsx"
+xlsx_file_path = "../storages/26.02.2024.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 
