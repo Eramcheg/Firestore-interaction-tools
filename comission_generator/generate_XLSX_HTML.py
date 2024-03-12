@@ -2,9 +2,10 @@ import os
 import shutil
 from openpyxl import load_workbook
 
-folder = "G:\\FIles\\Agents\\November Agents 2023\\e"
-folder_excels = "G:\\FIles\\Agents\\November Agents 2023\\text_excels"
-folder_htmls = "G:\\FIles\\Agents\\November Agents 2023\\text_htmls"
+root_folder = "G:\\FIles\\Agents\\February Agents 2024\\"
+folder = root_folder + "e"
+folder_excels = root_folder+ "text_excels"
+folder_htmls = root_folder + "text_htmls"
 
 
 def create_folders(root, dest_excels, dest_htmls):
@@ -59,6 +60,8 @@ def rename_files(root_folder):
                         month = 'October'
                     if i == 'Nov':
                         month = 'November'
+                    if i == 'Dec':
+                        month = 'December'
                     if i == 'First':
                         month = 'First'
                     if i == 'Second' or i == '2':
@@ -72,7 +75,7 @@ def rename_files(root_folder):
 
                 month = month.replace('_.xlsx', '')
                 print(month)
-                new_filename = f"{key}_2023_{month}.xlsx"
+                new_filename = f"{key}_2024_{month}.xlsx"
                 try:
                     os.rename(os.path.join(dirpath, filename), os.path.join(dirpath, new_filename))
                 except:
