@@ -14,30 +14,22 @@ for doc in docs:
     doc_dict = doc.to_dict()  # Convert the document to a dictionary
     description = doc_dict.get("description", "").lower()  # Get the description field
 
+    category = "Default"
     # Determine the plating based on the description
-    if "ring" in description:
-        stone = "White"
-        if " m" in description:
-            size = "M"
-        elif " s" in description:
-            size = "S"
-        elif " xl" in description:
-            size = "XL"
-        elif " l" in description:
-            size = "L"
-        elif " xs" in description:
-            size = "XS"
-        else:
-            size = "Without"
-    # elif "rosegold" in description or "RG" in description:
-    #     plating = "Rose Gold"
-    # else:
-    #     plating = "Without"
-
-    # If a plating was determined, update the document
-
-        batch.update(collection_ref.document(doc.id), {"size": size})
-        batch_counter += 1
+    if "necklace" in description:
+        category = "Necklaces"
+    if "ring" in description or "anello" in description:
+        category = "Rings"
+    if "earrings" in description or "orrechini" in description:
+        category = "Earrings"
+    if "bracelet" in description or "braccialetto" in description:
+        category = "Bracelets"
+    if "pen" in description :
+        category = "Accessories"
+    if "watch" in description or "orologio" in description:
+        category = "Accessories"
+    batch.update(collection_ref.document(doc.id), {"category": category})
+    batch_counter += 1
     if batch_counter >= 500:
         batch.commit()
         batch = db.batch()  # Start a new batch
