@@ -19,23 +19,25 @@ for order_doc in collection_ref.stream():
             # Extract 'number' and 'quantity'
             order_number = order.get('number')
             order_quantity = order.get('quantity', 0)
+            order_sum = order.get('price', 0) * order_quantity
 
             # Add to the dictionary, summing the quantities for duplicate numbers
             if order_number in order_summary:
-                order_summary[order_number] += order_quantity
+                order_summary[order_number][0] += order_quantity
+                order_summary[order_number][1] += order_sum
             else:
-                order_summary[order_number] = order_quantity
+                order_summary[order_number] = [order_quantity, order_sum]
 
 # Print or process the order_summary dictionary
 print(order_summary)
-with open('../static_files/statistics.csv', mode='w', newline='', encoding='utf-8') as file:
+with open('../static_files/statistics11_03_2024.csv', mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
 
     # Write the header
-    writer.writerow(['number', 'quantity'])
+    writer.writerow(['number', 'quantity', 'sum'])
 
     # Write the data
-    for number, quantity in order_summary.items():
-        writer.writerow([number, quantity])
+    for number, items in order_summary.items():
+        writer.writerow([number, items[0], items[1]])
 
 print("CSV file created successfully.")
