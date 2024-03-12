@@ -23,15 +23,20 @@ def upload_file(file_path, destination_path, name):
 
 
 # Path to your folder with images
-directory_path = "G:\\FIles\\newPhotosWInter24"
+directory_path = "C:\\Users\\eramc\\Downloads\\Pictures Summer Catalog 2024"
 
 # Iterating through all the images in the folder
 # Adding their public urls to dictionary
 for filename in os.listdir(directory_path):
-    if filename.endswith(".jpg"):
+    if filename.endswith(".jpg") or filename.endswith(".png") :
         file_path = os.path.join(directory_path, filename)
         upload_file(file_path, "NewImages/" + filename, filename[:-4])
         print(f"Uploaded {filename} to Firebase Storage.")
+    elif filename.endswith(".jpeg"):
+        file_path = os.path.join(directory_path, filename)
+        upload_file(file_path, "NewImages/" + filename, filename[:-4])
+        print(f"Uploaded {filename} to Firebase Storage.")
+
 
 # Saving data
 with open('../../static_files/new_image_urls.txt', 'w') as file:
