@@ -20,7 +20,7 @@ headers = [
     "Payments Dates"
 ]
 
-CURRENT_DATE = "01.2024"
+CURRENT_DATE = "02.2024"
 italy_agents = ["V000161","V000158","V000155",'V000147','V000142','V000122','V000157','V000030',"V000096",'V000136','V000184', 'V000186']
 quartals = {"First":["01.2024","02.2024","03.2024"],"Second":["04.2023","05.2023","06.2023"],"Third":["07.2023","08.2023","09.2023"],"Fourth":["10.2023","11.2023","12.2023"]}
 dict = {}
@@ -342,7 +342,7 @@ def make_month_tables(filename):
         if vertreter in italy_agents:
             new_sheet = wb.create_sheet(title=str(vertreter) + " First 24")
         else:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Jan 24")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Feb 24")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -413,7 +413,7 @@ def make_month_tables(filename):
 
 
 if __name__ == "__main__":
-    filename = "january_2024/OutputResult0.xlsx"
+    filename = "february_2024/OutputResult21.xlsx"
     # color_cells(filename)
     # make_agents_tables(filename)
     make_month_tables(filename)
