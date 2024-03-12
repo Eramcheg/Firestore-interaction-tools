@@ -37,7 +37,7 @@ firebase_admin.initialize_app(cred)
 collection_ref = firestore.client().collection("item")
 
 # Load Excel workbook
-xlsx_file_path = "../storages/26.02.2024.xlsx"
+xlsx_file_path = "../storages/11.03.2024.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 
@@ -92,7 +92,7 @@ for row in csv_reader:
         # Update the document in the batch
         field1_value = doc_snapshot.get("quantity")
         if field1_value != new_value:
-            print(f"Old value:{field1_value}    New value: {new_value}")
+            print(f"Product: {doc_snapshot.get('name')}     Old value:{field1_value}     New value: {new_value}")
             doc_ref = doc_snapshot.reference
             batch.update(doc_ref, {"quantity": new_value})
 
