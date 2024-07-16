@@ -2,9 +2,9 @@ import os
 import shutil
 from openpyxl import load_workbook
 
-root_folder = "G:\\FIles\\Agents\\February Agents 2024\\"
+root_folder = "G:\\FIles\\Agents\\May Agents 2024\\"
 folder = root_folder + "e"
-folder_excels = root_folder+ "text_excels"
+folder_excels = root_folder + "text_excels"
 folder_htmls = root_folder + "text_htmls"
 
 
@@ -46,6 +46,8 @@ def rename_files(root_folder):
                         month = 'January'
                     if i == 'Mar':
                         month = 'March'
+                    if i == 'Apr':
+                        month = 'April'
                     if i == 'May':
                         month = 'May'
                     if i == 'Jun':

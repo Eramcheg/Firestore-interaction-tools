@@ -23,7 +23,7 @@ def upload_file(file_path, destination_path, name):
 
 
 # Path to your folder with images
-directory_path = "C:\\Users\\eramc\\Downloads\\Pictures Summer Catalog 2024"
+directory_path = "C:\\Users\\eramc\\Downloads\\Bilder_Website\\Bilder_Website\\"
 
 # Iterating through all the images in the folder
 # Adding their public urls to dictionary
@@ -39,5 +39,5 @@ for filename in os.listdir(directory_path):
 
 
 # Saving data
-with open('../../static_files/new_image_urls.txt', 'w') as file:
+with open('../../static_files/updatedPhotos2024.txt', 'w') as file:
     file.write(str(dictionary))

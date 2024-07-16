@@ -30,7 +30,7 @@ def pdf_page_to_image(pdf_path, page_number, target_width, target_height):
 
     # Calculate zoom based on the target dimensions and actual page size
     page_width, page_height = page.rect.width, page.rect.height
-    zoom_x = target_width / (page_width / 2)  # Dividing by 2 because we'll split the image
+    zoom_x = target_width / (page_width)  # Dividing by 2 because we'll split the image
     zoom_y = target_height / page_height
     zoom = max(zoom_x, zoom_y)  # Ensure we cover both dimensions
 
@@ -64,20 +64,30 @@ def split_and_rescale_image(img_path, target_width, target_height, page_number, 
 
     return img_left_path, img_right_path
 
+def save_image(img_path, target_width, target_height, page_number, output_folder_path):
+    img = Image.open(img_path)
+    width, height = img.size
 
+    # Calculate image names based on page number
+    # Construct file paths for the output images
+    img_full_path = os.path.join(output_folder_path, f'page_{page_number+1}.jpg')
+
+    img.save(img_full_path, quality=75)
+
+    return img
 # Assuming each target image needs to be 1654x2339
-pdf_path = "../agents app/catalogs/Showcase & Display Spirits 2024.pdf"
-for i in range(1, 18):
-    page_number = i  # Adjust the page number as necessary
+pdf_path = "../agents app/catalogs/Main Catalog with Price NO barcodes LOW.pdf"
+for i in range(0, 127):
+    page_number = i  # This is already correct, starting from 0
     target_width, target_height = 1654, 2339
-    output_folder_path = "G:\\Files\\OliverWeber\\furnitureCatalog2024"  # Destination folder
+    output_folder_path = "G:\\Files\\OliverWeber\\newSummerCatalog2024"
 
     # Convert PDF page to image with adjusted zoom
-    img_path = pdf_page_to_image(pdf_path, page_number, target_width, target_height)
-
+    img_path = pdf_page_to_image(pdf_path, page_number, target_width, target_height)  # Removed the +1 here
+    img = save_image(img_path, target_width, target_height, page_number, output_folder_path)  # Ensure consistency in how page numbers are handled
     # Split the image into two, rescale if necessary, and specify the output folder and numeration
-    left_img_path, right_img_path = split_and_rescale_image(img_path, target_width, target_height, page_number,
-                                                            output_folder_path)
+    # left_img_path, right_img_path = split_and_rescale_image(img_path, target_width, target_height, page_number,
+    #                                                         output_folder_path)
 
-    print(f"Left image saved as: {left_img_path}")
-    print(f"Right image saved as: {right_img_path}")
+    # print(f"Left image saved as: {left_img_path}")
+    # print(f"Right image saved as: {right_img_path}")
