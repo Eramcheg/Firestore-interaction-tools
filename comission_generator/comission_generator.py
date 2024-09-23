@@ -20,7 +20,7 @@ headers = [
     "Payments Dates"
 ]
 
-CURRENT_DATE = "05.2024"
+CURRENT_DATE = "08.2024"
 italy_agents = ["V000161","V000158","V000155",'V000147','V000142','V000122','V000157','V000030',"V000096",'V000136','V000184', 'V000186']
 quartals = {"First":["01.2024","02.2024","03.2024"],"Second":["04.2024","05.2024","06.2024"],"Third":["07.2024","08.2024","09.2024"],"Fourth":["10.2024","11.2024","12.2024"]}
 dict = {}
@@ -259,7 +259,7 @@ def make_month_tables(filename):
 
         for x in range(18, len(row)):
             if vertreter_value in italy_agents:
-                for date in quartals['Second']:
+                for date in quartals['Third']:
                     if date in str(row[x]):
                         if row[x] and (",  " in str(row[x]) or ", " in str(row[x])):
                             try:
@@ -305,7 +305,7 @@ def make_month_tables(filename):
                 row1[15] = "PARTIALLY PAID"
             row1[16] = round(comission,1)
             if vertreter_value in italy_agents:
-                for date in quartals['Second']:
+                for date in quartals['Third']:
                     if date in str(row1[17]):
                         break
                     else:
@@ -340,9 +340,9 @@ def make_month_tables(filename):
         # Create a new sheet with the name as Vertreter value
         new_sheet = ""
         if vertreter in italy_agents:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Second 24")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Third 24")
         else:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " May 24")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Aug 24")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -413,7 +413,7 @@ def make_month_tables(filename):
 
 
 if __name__ == "__main__":
-    filename = "may_2024/OutputResult0.xlsx"
+    filename = "august_2024/OutputResult1.xlsx"
     # color_cells(filename)
     # make_agents_tables(filename)
     make_month_tables(filename)
