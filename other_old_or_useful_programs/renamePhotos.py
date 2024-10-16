@@ -1,7 +1,7 @@
 import os
 
 # Specify the folder path where your files are located
-folder_path = f'G:\\FIles\\OliverWeber\\furnitureCatalog'
+folder_path = f'G:\\FIles\\OliverWeber\\WinterCatalog2025'
 
 # List all files in the folder
 files = os.listdir(folder_path)
@@ -13,7 +13,7 @@ for filename in files:
         try:
             current_number = int(filename.split('_')[1].split('.')[0])
             # Calculate the new number by adding 127
-            new_number = current_number - 49
+            new_number = current_number - 7
             # Form the new filename
             new_filename = f"page_{new_number}.jpg"
             # Rename the file

@@ -76,11 +76,11 @@ def save_image(img_path, target_width, target_height, page_number, output_folder
 
     return img
 # Assuming each target image needs to be 1654x2339
-pdf_path = "../agents app/catalogs/Main Catalog with Price NO barcodes LOW.pdf"
-for i in range(0, 127):
-    page_number = i  # This is already correct, starting from 0
+pdf_path = "../agents app/catalogs/Catalog NEWCollection2025 LOW_WITH PRICE.pdf"
+for i in range(205, 237):
+    page_number = i-205  # This is already correct, starting from 0
     target_width, target_height = 1654, 2339
-    output_folder_path = "G:\\Files\\OliverWeber\\newSummerCatalog2024"
+    output_folder_path = "G:\\Files\\OliverWeber\\WinterCatalog2025"
 
     # Convert PDF page to image with adjusted zoom
     img_path = pdf_page_to_image(pdf_path, page_number, target_width, target_height)  # Removed the +1 here
