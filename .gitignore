@@ -17,3 +17,5 @@
 *.csv
 *.xlsx
 *.pdf
+*.sqlite3
+*.zip
