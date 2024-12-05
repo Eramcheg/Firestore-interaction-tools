@@ -8,28 +8,28 @@ source_app = firebase_admin.initialize_app(source_cred, name='source_app')
 
 db = firestore.client(app=source_app)
 
-def get_new_user_id():
-    @firestore.transactional
-    def increment_user_id(transaction, user_counter_ref):
-        snapshot = user_counter_ref.get(transaction=transaction)
-        last_user_id = snapshot.get('lastUserId') if snapshot.exists else 3000
-        new_user_id = last_user_id + 1
-        transaction.update(user_counter_ref, {'lastUserId': new_user_id})
-        return new_user_id
-
-    metadata_collection = db.collection('metadata')
-    user_counter_ref = metadata_collection.document('userCounter')
-    transaction = db.transaction()
-    new_user_id = increment_user_id(transaction, user_counter_ref)
-    return new_user_id
+# def get_new_user_id():
+#     @firestore.transactional
+#     def increment_user_id(transaction, user_counter_ref):
+#         snapshot = user_counter_ref.get(transaction=transaction)
+#         last_user_id = snapshot.get('lastUserId') if snapshot.exists else 3000
+#         new_user_id = last_user_id + 1
+#         transaction.update(user_counter_ref, {'lastUserId': new_user_id})
+#         return new_user_id
+#
+#     metadata_collection = db.collection('metadata')
+#     user_counter_ref = metadata_collection.document('userCounter')
+#     transaction = db.transaction()
+#     new_user_id = increment_user_id(transaction, user_counter_ref)
+#     return new_user_id
 
 # Iterate over each document in 'users' collection to assign userIds
-users_collection = db.collection('users')
+users_collection = db.collection('webUsers')
 users_documents = users_collection.stream()
 
 for doc in users_documents:
     # new_user_id = get_new_user_id()  # Get a unique userId for each user
-    doc.reference.update({'Enabled': True})
+    doc.reference.update({'customer_type': "B2B"})
 
 print("Updated all documents with the registrationDate.")
 # Get a Firestore client

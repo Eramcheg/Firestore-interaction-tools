@@ -2,7 +2,7 @@ import os
 import shutil
 from openpyxl import load_workbook
 
-root_folder = "G:\\FIles\\Agents\\August Agents 2024\\"
+root_folder = "G:\\FIles\\Agents\\October Agents 2024\\"
 folder = root_folder + "e"
 folder_excels = root_folder + "text_excels"
 folder_htmls = root_folder + "text_htmls"

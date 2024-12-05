@@ -26,7 +26,7 @@ import datetime
 # print(f"Downloaded '{filename}' from the FTP server.")
 #
 columnQuantity = 2  # Starts with 0
-columnNumber = 4 # Starts with 0
+columnNumber = 4  # Starts with 0
 
 
 # Initialize Firebase Admin with your service account credentials
@@ -37,7 +37,7 @@ firebase_admin.initialize_app(cred)
 collection_ref = firestore.client().collection("item")
 
 # Load Excel workbook
-xlsx_file_path = "../storages/16.10.2024.xlsx"
+xlsx_file_path = "../storages/26.11.2024.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 

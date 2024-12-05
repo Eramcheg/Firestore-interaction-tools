@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime
 import csv
-
+import openpyxl
 cred = credentials.Certificate("G:\\FIles\\firebase\\key2.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
