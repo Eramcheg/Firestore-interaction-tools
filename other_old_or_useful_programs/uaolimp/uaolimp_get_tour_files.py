@@ -42,7 +42,7 @@ def download_student_tasks(student_id, paralel, task_count=5):
         return
 
     student_data = student_ref[0].to_dict()
-    save_dir = os.path.join(os.getcwd(), "downloads")  # Папка для загрузки файлов
+    save_dir = os.path.join(os.getcwd(), "../downloads")  # Папка для загрузки файлов
     os.makedirs(save_dir, exist_ok=True)
 
     for task_id in range(1, task_count + 1):

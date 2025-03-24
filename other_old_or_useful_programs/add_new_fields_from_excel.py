@@ -10,7 +10,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Filepath to the Excel file
-xlsx_file_path = "..\\agents app\\storages\\16.10.2024.xlsx"
+xlsx_file_path = "..\\agents app\\storages\\28.01.2025.xlsx"
 
 # Load the Excel workbook
 workbook = openpyxl.load_workbook(xlsx_file_path)
@@ -25,7 +25,7 @@ batch_counter = 0
 batch_size = 500  # Firestore limits the batch size
 
 csv_file_path = "../static_files/updated_products.csv"
-csv_columns = ['product_name', 'width', 'height', 'chain_length']
+csv_columns = ['product_name', 'EAN']
 def convert_to_float(value):
     if value is not None:
         # Replace commas with periods for decimal conversion
@@ -45,6 +45,8 @@ with open(csv_file_path, mode='w', newline='') as csv_file:
         product_width = convert_to_float(row[18])  # S column
         product_height = convert_to_float(row[19])  # T column
         chain_length = convert_to_float(row[21])  # V column
+        ean_code = str(row[7])  # V column
+
 
         # Skip rows where product_name is None or empty
         if not product_name:
@@ -60,27 +62,32 @@ with open(csv_file_path, mode='w', newline='') as csv_file:
                 # Prepare the update data
                 update_data = {}
                 csv_row = [product_name]
-
                 # Add product_width if it's not None or 0
-                if product_width is not None and product_width != 0 and product_width != '':
-                    update_data["product_width"] = float(product_width)
-                    csv_row.append(product_width)
+                if ean_code is not None and ean_code != '':
+                    update_data["ean_13"] = ean_code
+                    csv_row.append(ean_code)
                 else:
                     csv_row.append("")
-
-                # Add product_height if it's not None or 0
-                if product_height is not None and product_height != 0 and product_height != '':
-                    update_data["product_height"] = float(product_height)
-                    csv_row.append(product_height)
-                else:
-                    csv_row.append("")
-
-                # Add chain_length if it's not None or 0
-                if chain_length is not None and chain_length != 0 and chain_length != '':
-                    update_data["chain_length"] = float(chain_length)
-                    csv_row.append(chain_length)
-                else:
-                    csv_row.append("")
+                # Add product_width if it's not None or 0
+                # if product_width is not None and product_width != 0 and product_width != '':
+                #     update_data["product_width"] = float(product_width)
+                #     csv_row.append(product_width)
+                # else:
+                #     csv_row.append("")
+                #
+                # # Add product_height if it's not None or 0
+                # if product_height is not None and product_height != 0 and product_height != '':
+                #     update_data["product_height"] = float(product_height)
+                #     csv_row.append(product_height)
+                # else:
+                #     csv_row.append("")
+                #
+                # # Add chain_length if it's not None or 0
+                # if chain_length is not None and chain_length != 0 and chain_length != '':
+                #     update_data["chain_length"] = float(chain_length)
+                #     csv_row.append(chain_length)
+                # else:
+                #     csv_row.append("")
 
                 # Only perform the update if there's something to update
                 if update_data:

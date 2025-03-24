@@ -20,9 +20,9 @@ headers = [
     "Payments Dates"
 ]
 
-CURRENT_DATE = "10.2024"
+CURRENT_DATE = "02.2025"
 italy_agents = ["V000161","V000158","V000155",'V000147','V000142','V000122','V000157','V000030',"V000096",'V000136','V000184', 'V000186']
-quartals = {"First":["01.2024","02.2024","03.2024"],"Second":["04.2024","05.2024","06.2024"],"Third":["07.2024","08.2024","09.2024"],"Fourth":["10.2024","11.2024","12.2024"]}
+quartals = {"First":["01.2025","02.2025","03.2025"],"Second":["04.2025","05.2025","06.2025"],"Third":["07.2025","08.2025","09.2025"],"Fourth":["10.2025","11.2025","12.2025"]}
 dict = {}
 
 import openpyxl
@@ -73,7 +73,7 @@ def color_cells(filename):
                             pass
 
                     cell.fill = green_fill
-                elif "2024" in str(cell.value):
+                elif "2025" in str(cell.value):
                     cell.fill = light_green_fill
 
         # for row in range(1, sheet.max_row + 1):  # Iterate over all rows
@@ -107,9 +107,9 @@ def color_cells(filename):
         target_cell2 = sheet.cell(row=sheet.max_row, column=14)
         source_cell3 = sheet.cell(row=sheet.max_row - 2, column=16)
         target_cell3 = sheet.cell(row=sheet.max_row, column=16)
-        source_cell2.value = "October paid amount"
+        source_cell2.value = "February paid amount"
         target_cell2.value = "All paid amount"
-        source_cell3.value = "October comissions"
+        source_cell3.value = "February comissions"
         target_cell3.value = "All comissions"
         #target_cell.value = source_cell.value
 
@@ -144,7 +144,7 @@ def make_agents_tables(filename):
     # Create sheets for each Vertreter
     for vertreter, vertreter_data in vertreter_dict.items():
         # Create a new sheet with the name as Vertreter value
-        new_sheet = wb.create_sheet(title=str(vertreter) + " Total 24")
+        new_sheet = wb.create_sheet(title=str(vertreter) + " Total 25")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -259,7 +259,7 @@ def make_month_tables(filename):
 
         for x in range(18, len(row)):
             if vertreter_value in italy_agents:
-                for date in quartals['Fourth']:
+                for date in quartals['First']:
                     if date in str(row[x]):
                         if row[x] and (",  " in str(row[x]) or ", " in str(row[x])):
                             try:
@@ -297,15 +297,19 @@ def make_month_tables(filename):
             print(float(row1[6]))
             print(paid)
             # print()
+            print(vertreter_value)
+
             if paid == 0:
                 row1[15] = "UNPAID"
+            elif float(row1[6]) == 0:
+                row1[15] = "PAID"
             elif paid / float(row1[6]) >= 1:
                 row1[15] = "PAID"
             else:
                 row1[15] = "PARTIALLY PAID"
             row1[16] = round(comission,1)
             if vertreter_value in italy_agents:
-                for date in quartals['Fourth']:
+                for date in quartals['First']:
                     if date in str(row1[17]):
                         break
                     else:
@@ -340,9 +344,9 @@ def make_month_tables(filename):
         # Create a new sheet with the name as Vertreter value
         new_sheet = ""
         if vertreter in italy_agents:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Fourth 24")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " First 25")
         else:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Oct 24")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Feb 25")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -413,7 +417,7 @@ def make_month_tables(filename):
 
 
 if __name__ == "__main__":
-    filename = "october_2024/OutputResult0.xlsx"
+    filename = "february_2025/OutputResult0.xlsx"
     # color_cells(filename)
     # make_agents_tables(filename)
     make_month_tables(filename)

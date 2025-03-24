@@ -59,7 +59,7 @@ def main_function(certificate, folder, app_name):
 
         print(f"Backup created successfully: {full_path}")
 
-firebases = [
+firebases=[
     "G:\\FIles\\firebase\\key2.json",
     "G:\\FIles\\firebase\\uainternetolimp-41dd1-firebase-adminsdk-i78pu-fd374d92bc.json"
 ]

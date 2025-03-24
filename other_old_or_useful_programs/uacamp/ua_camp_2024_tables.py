@@ -96,7 +96,7 @@ df = pd.DataFrame(data)
 df_sorted = df.sort_values(by="tokens", ascending=False)
 
 # Save the DataFrame to an Excel file
-file_path = "Рейтинг.xlsx"
+file_path = "../uaolimp/Рейтинг.xlsx"
 df_sorted.to_excel(file_path, index=False)
 
 print(f"Excel file saved to: {file_path}")

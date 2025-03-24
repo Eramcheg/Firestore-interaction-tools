@@ -23,21 +23,21 @@ def upload_file(file_path, destination_path, name):
 
 
 # Path to your folder with images
-directory_path = "C:\\Users\\eramc\\Downloads\\Telegram Desktop\\Corrected Bilder\\Corrected Bilder"
+directory_path = "C:\\Users\\eramc\\Downloads\\Telegram Desktop\\Summer Spring Pictures\\Summer Spring Pictures"
 
 # Iterating through all the images in the folder
 # Adding their public urls to dictionary
 for filename in os.listdir(directory_path):
     if filename.endswith(".jpg") or filename.endswith(".png") :
         file_path = os.path.join(directory_path, filename) #NewImages/ было, нужно вставить это если использовать новые фотографии не для каталога
-        upload_file(file_path, "26_11_2024/" + filename, filename[:-4])
+        upload_file(file_path, "NewImages/" + filename, filename[:-4])
         print(f"Uploaded {filename} to Firebase Storage.")
     elif filename.endswith(".jpeg"):
         file_path = os.path.join(directory_path, filename)
-        upload_file(file_path, "26_11_2024/" + filename, filename[:-4])
+        upload_file(file_path, "NewImages/" + filename, filename[:-4])
         print(f"Uploaded {filename} to Firebase Storage.")
 
 
 # Saving data
-with open('../../static_files/26_11_2024_2_Images_For_Products.txt', 'w') as file:
+with open('../../static_files/20_03_2025_Images_For_Products.txt', 'w') as file:
     file.write(str(dictionary))

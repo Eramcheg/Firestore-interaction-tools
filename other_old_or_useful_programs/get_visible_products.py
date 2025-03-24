@@ -17,7 +17,7 @@ query = collection_ref.where("Visible", "==", True)
 docs = query.stream()
 
 # Extract 'name' fields and write them to a CSV file
-with open('../static_files/visible_items.csv', mode='w', newline='') as file:
+with open('../static_files/all_items06012025.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['name'])  # Write CSV header
 
