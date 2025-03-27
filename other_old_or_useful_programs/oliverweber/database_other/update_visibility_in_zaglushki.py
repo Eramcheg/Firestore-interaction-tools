@@ -11,7 +11,7 @@ db = firestore.client()
 
 # Read names from CSV
 names = []
-with open('../static_files/zaglushki.csv', 'r', encoding='utf-8') as file:
+with open('../../../static_files/zaglushki.csv', 'r', encoding='utf-8') as file:
     reader = csv.reader(file)
     next(reader)  # Skip header row
     for row in reader:

@@ -10,7 +10,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Filepath to the Excel file
-xlsx_file_path = "..\\agents app\\storages\\28.01.2025.xlsx"
+xlsx_file_path = "../../../agents app/storages/28.01.2025.xlsx"
 
 # Load the Excel workbook
 workbook = openpyxl.load_workbook(xlsx_file_path)
@@ -24,7 +24,7 @@ batch = db.batch()
 batch_counter = 0
 batch_size = 500  # Firestore limits the batch size
 
-csv_file_path = "../static_files/updated_products.csv"
+csv_file_path = "../../../static_files/updated_products.csv"
 csv_columns = ['product_name', 'EAN']
 def convert_to_float(value):
     if value is not None:

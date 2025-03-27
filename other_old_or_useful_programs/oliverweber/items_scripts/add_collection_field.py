@@ -8,12 +8,12 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 collection_ref = db.collection("item")
 
-xlsx_file_path = "..\\static_files\\Coins and Monograms.xlsx"
+xlsx_file_path = "../../../static_files/Coins and Monograms.xlsx"
 
 wb = openpyxl.load_workbook(xlsx_file_path)
 sheet = wb.active
 
-# Чтение данных из колонки E (предполагается, что E — это пятая колонка)
+# Чтение данных из колонки A
 names = [cell.value for cell in sheet['A'] if cell.value]
 
 # Обновление документов в Firestore

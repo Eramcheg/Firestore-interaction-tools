@@ -42,6 +42,6 @@ for index, filename in enumerate(files, start=1):
         print(f"Uploaded {filename} to Firebase Storage.")
 
 # Saving data
-with open('../static_files/summerImages.txt', 'w') as file:
+with open('../../../static_files/summerImages.txt', 'w') as file:
     for idx, url in enumerate(urls, start=1):
         file.write(f"//{idx+171}\n\"{url}\",\n\n")

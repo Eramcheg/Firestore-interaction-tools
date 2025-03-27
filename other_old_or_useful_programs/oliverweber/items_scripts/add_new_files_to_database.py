@@ -7,7 +7,7 @@ cred = credentials.Certificate("G:\\FIles\\firebase\\key2.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 collection_ref = db.collection("item")
-file_path = '..\\product_wrapper\\output_file3.csv'
+file_path = '../../../product_wrapper/output_file3.csv'
 
 with open(file_path, mode='r', encoding='utf-8') as file:
     reader = csv.DictReader(file, delimiter=';',

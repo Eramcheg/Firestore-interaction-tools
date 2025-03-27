@@ -11,7 +11,7 @@ db = firestore.client()
 collection_ref = db.collection("item")
 
 # Путь к исходному файлу Excel
-xlsx_file_path = "../static_files/18.03.2025.xlsx"
+xlsx_file_path = "../../../static_files/18.03.2025.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 
@@ -126,6 +126,6 @@ for prod in products:
     row_data = [prod[h] for h in headers]
     ws_new.append(row_data)
 
-output_file = "springproducts.xlsx"
+output_file = "../../../static_files/springproducts.xlsx"
 wb_new.save(output_file)
 print(f"Файл сохранён: {output_file}")

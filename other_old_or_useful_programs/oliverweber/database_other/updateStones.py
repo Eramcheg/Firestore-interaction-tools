@@ -10,7 +10,7 @@ firebase_admin.initialize_app(cred)
 collection_ref = firestore.client().collection("item")
 
 # Load the Excel file
-xlsx_file_path = "../static_files/List with crystals info.xlsx"
+xlsx_file_path = "../../../static_files/List with crystals info.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook['new website testing']
 

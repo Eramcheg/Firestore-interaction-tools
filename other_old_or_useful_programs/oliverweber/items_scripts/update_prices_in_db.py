@@ -8,7 +8,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 collection_ref = firestore.client().collection("item")
 
-workbook = openpyxl.load_workbook("../agents app/storages/05.04.2024.xlsx")
+workbook = openpyxl.load_workbook("../../../agents app/storages/05.04.2024.xlsx")
 sheet = workbook.active
 # Function to convert to float or return 0
 def to_float(value):

@@ -11,7 +11,7 @@ db = firestore.client()
 collection_ref = db.collection("Stones")
 
 # Путь к Excel-файлу
-file_path = '..\\static_files\\stones.xlsx'
+file_path = '../../../static_files/stones.xlsx'
 
 # Чтение Excel-файла с использованием openpyxl
 wb = load_workbook(file_path)

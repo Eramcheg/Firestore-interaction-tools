@@ -22,7 +22,7 @@ for doc in results:
     rows.append(data)
 
 # Write to CSV
-csv_file = "mina@qrcateringCart.csv"
+csv_file = "../../../static_files/mina@qrcateringCart.csv"
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     writer.writeheader()

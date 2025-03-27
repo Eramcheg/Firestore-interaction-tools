@@ -9,7 +9,7 @@ db = firestore.client()
 collection_ref = db.collection("item")
 
 # Путь к Excel‑файлу
-xlsx_file_path = "springproducts.xlsx"
+xlsx_file_path = "../../../static_files/springproducts.xlsx"
 workbook = openpyxl.load_workbook(xlsx_file_path)
 sheet = workbook.active
 

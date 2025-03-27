@@ -18,7 +18,7 @@ query = collection_ref.where("Visible", "==", True)
 docs = query.stream()
 
 # Создаем новый Excel файл
-file_path = '../static_files/all_items19032025.xlsx'
+file_path = '../../../static_files/all_items19032025.xlsx'
 workbook = Workbook()
 worksheet = workbook.active
 worksheet.title = "Items"

@@ -10,7 +10,7 @@ initialize_app(cred)
 db = firestore.client()
 
 # Путь к xlsx-файлу
-xlsx_file_path = "..\\static_files\\LBI 19.11.xlsx"
+xlsx_file_path = "../../../static_files/LBI 19.11.xlsx"
 
 # Загрузка Excel-файла
 workbook = openpyxl.load_workbook(xlsx_file_path)

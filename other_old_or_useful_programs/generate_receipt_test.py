@@ -5,7 +5,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 
 # Создание документа
-doc = SimpleDocTemplate("order_summary.pdf", pagesize=A4)
+doc = SimpleDocTemplate("../static_files/order_summary.pdf", pagesize=A4)
 elements = []
 
 
