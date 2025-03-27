@@ -11,17 +11,24 @@ collection_ref = firestore.client().collection("item")
 docs = collection_ref.stream()
 batch = db.batch()
 batch_counter = 0
+names2 = ['KS001', 'KS001G', 'KS001RG', 'KS002', 'KS002G', 'KS002RG', 'KS003', 'KS004', 'KS005', 'KS007', 'KS008', 'KS010', 'KS011', 'KS012G40', 'KS012G55', 'KS012R40', 'KS012R55', 'KS012RG40', 'KS012RG55', 'KS013G40', 'KS013G55', 'KS013G70', 'KS013G90', 'KS013R40', 'KS013R55', 'KS013R70', 'KS013R90', 'KS013RG40', 'KS013RG55', 'KS013RG70', 'KS013RG90', 'KS014G40', 'KS014R40', 'KS014RG40', 'KS015', 'KS016R50', 'KS016R80', 'KS017R15', 'KS017R40', 'KS018G42', 'KS018R42', 'KS019R42']
 
-query = collection_ref.where("category", "==","Post Earrings").get()
-names = []
+# for name in names2:
+query = collection_ref.where("product_name", "==", "back").get()
+#     names = []
 for doc in query:
-    if "size" in doc.to_dict():
-        doc_ref = collection_ref.document(doc.id)
-        print(doc.to_dict())
-        doc_ref.update({
-            "size": firestore.DELETE_FIELD
-        })
-        print(f"Deleted 'size' field from document {doc.id}")
+    # if "size" in doc.to_dict():
+    #     doc_ref = collection_ref.document(doc.id)
+    #     print(doc.to_dict())
+    #     doc_ref.update({
+    #         "size": firestore.DELETE_FIELD
+    #     })
+    #     print(f"Deleted 'size' field from document {doc.id}")
+    doc_ref = collection_ref.document(doc.id)
+    print(doc.to_dict())
+    doc_ref.update({
+        "b2b_only": True
+    })
 # with open('unmodified_names.csv', newline='', encoding="utf-8") as csvfile:
 #     reader = csv.reader(csvfile)
 #     for row in reader:
