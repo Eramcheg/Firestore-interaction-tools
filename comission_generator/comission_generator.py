@@ -20,7 +20,7 @@ headers = [
     "Payments Dates"
 ]
 
-CURRENT_DATE = "02.2025"
+CURRENT_DATE = "03.2025"
 italy_agents = ["V000161","V000158","V000155",'V000147','V000142','V000122','V000157','V000030',"V000096",'V000136','V000184', 'V000186']
 quartals = {"First":["01.2025","02.2025","03.2025"],"Second":["04.2025","05.2025","06.2025"],"Third":["07.2025","08.2025","09.2025"],"Fourth":["10.2025","11.2025","12.2025"]}
 dict = {}
@@ -107,9 +107,9 @@ def color_cells(filename):
         target_cell2 = sheet.cell(row=sheet.max_row, column=14)
         source_cell3 = sheet.cell(row=sheet.max_row - 2, column=16)
         target_cell3 = sheet.cell(row=sheet.max_row, column=16)
-        source_cell2.value = "February paid amount"
+        source_cell2.value = "March paid amount"
         target_cell2.value = "All paid amount"
-        source_cell3.value = "February comissions"
+        source_cell3.value = "March comissions"
         target_cell3.value = "All comissions"
         #target_cell.value = source_cell.value
 
@@ -346,7 +346,7 @@ def make_month_tables(filename):
         if vertreter in italy_agents:
             new_sheet = wb.create_sheet(title=str(vertreter) + " First 25")
         else:
-            new_sheet = wb.create_sheet(title=str(vertreter) + " Feb 25")
+            new_sheet = wb.create_sheet(title=str(vertreter) + " Mar 25")
 
         # Write headers to the new sheet
         new_sheet.append(headers)
@@ -417,7 +417,7 @@ def make_month_tables(filename):
 
 
 if __name__ == "__main__":
-    filename = "february_2025/OutputResult0.xlsx"
+    filename = "march_2025/OutputResult0.xlsx"
     # color_cells(filename)
     # make_agents_tables(filename)
     make_month_tables(filename)
